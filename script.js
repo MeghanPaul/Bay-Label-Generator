@@ -1,16 +1,24 @@
+const bayNameEl = document.querySelector("#baySearch");
 const bayFormEl = document.querySelector("#baySearchForm");
 
-bayFormEl.addEventListener("submit",formSubmitHandler);
-
-const formSubmitHandler = (event) => {
+var formSubmitHandler = function(event) {
+    console.log(event);
     //prevent page refresh
-    event.preventDefault;
+    event.preventDefault();
 
-    var bayID = bayFormEl.value.trim();
+    var bayID = bayNameEl.value.trim();
+    console.log(bayID);
 
     if(bayID) {
-        cityNameEl.value = "";
+        console.log("Bay ID: " + bayID);
+        bayNameEl.value = "";
         //addToHistory(bayID);
-        //displayBarcode(bayID);
+        displayBarcode(bayID);
     }
 };
+
+const displayBarcode = (bayID) => {
+    $("#barcode-img").attr("src",`http://bwipjs-api.metafloor.com/?bcid=code128&text=9809005612-${bayID}&includetext`);
+}
+
+bayFormEl.addEventListener("submit",formSubmitHandler);
